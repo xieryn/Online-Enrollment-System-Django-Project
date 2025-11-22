@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a0dad 0%, #000000 100%);
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container {
+            text-align: center;
+            width: 100%;
+            max-width: 320px;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #d9b3ff;
+        }
+
+        form p {
+            margin: 0 0 15px 0;
+            text-align: left;
+        }
+
+        input {
+            width: 100%;
+            max-width: 380px;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            max-width: 280px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background-color: #8e2de2;
+            color: #fff;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6a0dad;
+        }
+
+        .alert {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .alert-error {
+            background-color: #b00020;
+            color: #fff;
+        }
+
+        .alert-success {
+            background-color: #00c853;
+            color: #fff;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #cfcfcf;
+        }
+
+        a {
+            color: #d9b3ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Login</h2>
+
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+
+        <p>
+            Don't have an account? <a href="{% url 'register_user' %}">Register</a>
+        </p>
+    </div>
+</body>
+
+</html>

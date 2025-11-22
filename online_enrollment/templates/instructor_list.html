@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .instructors-form {
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .instructors-form .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .instructors-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #f0d6ff;
+    }
+
+    .instructors-form input,
+    .instructors-form textarea,
+    .instructors-form select {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #6a0dad;
+        background: #2e0854;
+        color: #fff;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .instructors-form input:focus,
+    .instructors-form textarea:focus,
+    .instructors-form select:focus {
+        outline: none;
+        border-color: #8e2de2;
+        box-shadow: 0 0 8px rgba(142, 45, 226, 0.8);
+    }
+
+    .instructors-form .help-text {
+        font-size: 0.85em;
+        color: #cfcfcf;
+        margin-top: 3px;
+    }
+
+    .instructors-form .error {
+        font-size: 0.85em;
+        color: #ff6b6b;
+        margin-top: 3px;
+    }
+
+    .instructors-form button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background-color: #8e2de2;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .instructors-form button:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #fff;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #8e2de2;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn-warning {
+        background-color: #ff9f1a;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07b00;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.95em;
+    }
+
+    table {
+        width: 90%;
+        margin: 0 auto 50px;
+        border-collapse: collapse;
+        background-color: #2e0854;
+        color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    table thead {
+        background-color: #6a0dad;
+    }
+
+    table th,
+    table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #4a148c;
+    }
+
+    table tr:hover {
+        background-color: #8e2de2;
+    }
+</style>
+
+<h2 style="text-align: center; color: #d9b3ff; margin-bottom: 20px;">Instructors</h2>
+
+
+<a href="{% url 'instructor_add' %}" class="btn btn-primary" style="margin-bottom: 20px;">Add Instructor</a>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for instructor in instructors %}
+        <tr>
+            <td>{{ instructor.instructor_id }}</td>
+            <td>{{ instructor.first_name }}</td>
+            <td>{{ instructor.last_name }}</td>
+            <td>{{ instructor.e_mail }}</td>
+            <td>{{ instructor.department }}</td>
+            <td>
+                <a href="{% url 'instructor_edit' instructor.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No instructors yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

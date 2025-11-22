@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Body and HTML setup */
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #6a0dad 0%, #000000 100%);
+        color: #e0e0e0;
+        overflow-x: hidden;
+        /* prevent horizontal scroll */
+    }
+
+    .dashboard-container {
+        margin: 50px auto;
+        text-align: center;
+        max-width: 1200px;
+        padding: 0 20px;
+    }
+
+    .dashboard-container h2 {
+        color: #d9b3ff;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .dashboard-container p {
+        color: #cfcfcf;
+        font-size: 1.2em;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .card {
+        background: #8e2de2;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        border-radius: 12px;
+        padding: 30px;
+        width: 220px;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: #fff;
+    }
+
+    /* Teacher card variations */
+    .card.teacher-courses {
+        background: #4a148c;
+    }
+
+    .card.teacher-enrollments {
+        background: #6a0dad;
+    }
+
+    .card.teacher-instructors {
+        background: #8e2de2;
+    }
+
+    .card.teacher-payments {
+        background: #4a148c;
+    }
+
+    .card h5 {
+        margin: 0 0 10px 0;
+        color: #f0d6ff;
+        font-size: 1.2em;
+    }
+
+    .card p {
+        font-size: 0.9em;
+        margin-bottom: 15px;
+        color: #e0d4f5;
+    }
+
+    .card a {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #6a0dad;
+        border-radius: 8px;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .card a:hover {
+        background-color: #4a148c;
+    }
+
+    @media (max-width: 768px) {
+        .dashboard-cards {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            width: 80%;
+        }
+    }
+</style>
+
+<div class="dashboard-container">
+    <h2>Welcome, {{ user.username }}!</h2>
+    {% if user.profile.role == 'teacher' %}
+    <p>Here’s your teacher dashboard.</p>
+    {% else %}
+    <p>Here’s your student dashboard.</p>
+    {% endif %}
+
+    <div class="dashboard-cards">
+        {% if user.profile.role == 'teacher' %}
+        <div class="card">
+            <h5>Students</h5>
+            <p>Add, edit, or manage all students.</p>
+            <a href="{% url 'student_list' %}">Manage</a>
+        </div>
+        <div class="card teacher-courses">
+            <h5>Courses</h5>
+            <p>Add or update courses.</p>
+            <a href="{% url 'course_list' %}">Manage</a>
+        </div>
+        <div class="card teacher-enrollments">
+            <h5>Enrollments</h5>
+            <p>View and manage enrollments.</p>
+            <a href="{% url 'enrollment_list' %}">Manage</a>
+        </div>
+        <div class="card teacher-instructors">
+            <h5>Instructors</h5>
+            <p>Add or manage instructors.</p>
+            <a href="{% url 'instructor_list' %}">Manage</a>
+        </div>
+        <div class="card teacher-payments">
+            <h5>Payments</h5>
+            <p>View or manage student payments.</p>
+            <a href="{% url 'payment_list' %}">Manage</a>
+        </div>
+        {% else %}
+        <div class="card">
+            <h5>My Profile</h5>
+            <p>View or edit your personal info.</p>
+            <a href="{% url 'student_profile_edit' %}">Edit</a>
+        </div>
+        <div class="card teacher-courses">
+            <h5>My Enrollments</h5>
+            <p>View your courses and enrollment status.</p>
+            <a href="{% url 'enrollment_list' %}">View</a>
+        </div>
+        <div class="card teacher-enrollments">
+            <h5>My Payments</h5>
+            <p>Check your payment history.</p>
+            <a href="{% url 'payment_list' %}">View</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

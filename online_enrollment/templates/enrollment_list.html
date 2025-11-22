@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .enrollments-form {
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .enrollments-form .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .enrollments-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #f0d6ff;
+    }
+
+    .enrollments-form input,
+    .enrollments-form textarea,
+    .enrollments-form select {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #6a0dad;
+        background: #2e0854;
+        color: #fff;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .enrollments-form input:focus,
+    .enrollments-form textarea:focus,
+    .enrollments-form select:focus {
+        outline: none;
+        border-color: #8e2de2;
+        box-shadow: 0 0 8px rgba(142, 45, 226, 0.8);
+    }
+
+    .enrollments-form .help-text {
+        font-size: 0.85em;
+        color: #cfcfcf;
+        margin-top: 3px;
+    }
+
+    .enrollments-form .error {
+        font-size: 0.85em;
+        color: #ff6b6b;
+        margin-top: 3px;
+    }
+
+    .enrollments-form button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background-color: #8e2de2;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .enrollments-form button:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #fff;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #8e2de2;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn-warning {
+        background-color: #ff9f1a;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07b00;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.95em;
+    }
+
+    table {
+        width: 90%;
+        margin: 0 auto 50px;
+        border-collapse: collapse;
+        background-color: #2e0854;
+        color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    table thead {
+        background-color: #6a0dad;
+    }
+
+    table th,
+    table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #4a148c;
+    }
+
+    table tr:hover {
+        background-color: #8e2de2;
+    }
+</style>
+
+<h2 style="text-align: center; color: #d9b3ff; margin-bottom: 20px;">Enrollments</h2>
+
+
+<a href="{% url 'enrollment_add' %}" class="btn btn-primary" style="margin-bottom: 20px;">Add Enrollment</a>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for enrollment in enrollments %}
+        <tr>
+            <td>{{ enrollment.enrollment_id }}</td>
+            <td>{{ enrollment.studentid }}</td>
+            <td>{{ enrollment.courseid }}</td>
+            <td>{{ enrollment.status }}</td>
+            <td>
+                <a href="{% url 'enrollment_edit' enrollment.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No enrollments yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

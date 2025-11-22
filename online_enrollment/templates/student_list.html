@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Reuse your table styling */
+    table {
+        width: 90%;
+        margin: 0 auto 50px;
+        border-collapse: collapse;
+        background-color: #2e0854;
+        color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    table thead {
+        background-color: #6a0dad;
+    }
+
+    table th,
+    table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #4a148c;
+    }
+
+    table tr:hover {
+        background-color: #8e2de2;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #fff;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #8e2de2;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn-warning {
+        background-color: #ff9f1a;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07b00;
+    }
+</style>
+
+<h2 style="text-align: center; color: #d9b3ff; margin-bottom: 20px;">Students</h2>
+
+<a href="{% url 'student_add' %}" class="btn btn-primary" style="margin-bottom: 20px; display:inline-block;">Add
+    Student</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.student_id }}</td>
+            <td>{{ student.firstname }}</td>
+            <td>{{ student.lastname }}</td>
+            <td>{{ student.email }}</td>
+            <td>
+                <a href="{% url 'student_edit' student.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No students yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

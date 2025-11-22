@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    .success-container {
+        max-width: 500px;
+        margin: 60px auto 40px auto;
+        background: #2e0854;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        padding: 40px 30px 30px 30px;
+        text-align: center;
+        color: #fff;
+    }
+
+    .success-container h2 {
+        color: #d9b3ff;
+        margin-bottom: 18px;
+    }
+
+    .success-container p {
+        margin-bottom: 30px;
+        font-size: 1.1em;
+    }
+
+    .success-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        justify-content: center;
+    }
+
+    .success-link-btn {
+        display: inline-block;
+        padding: 12px 22px;
+        border-radius: 10px;
+        background: #8e2de2;
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background 0.3s;
+        border: none;
+        font-size: 1em;
+        margin-bottom: 5px;
+    }
+
+    .success-link-btn:hover {
+        background: #6a0dad;
+        color: #fff;
+    }
+</style>
+
+<div class="success-container">
+    <h2>Enrollment Successful!</h2>
+    <p>Thank you for entering your credentials. Your information has been successfully submitted.</p>
+    <div class="success-links">
+        <a href="{% url 'student_list' %}" class="success-link-btn">Input Another Student</a>
+        <a href="{% url 'course_list' %}" class="success-link-btn">Input Another Course</a>
+        <a href="{% url 'enrollment_list' %}" class="success-link-btn">Input Another Enrollment</a>
+        <a href="{% url 'instructor_list' %}" class="success-link-btn">Input Another Instructor</a>
+        <a href="{% url 'payment_list' %}" class="success-link-btn">Input Another Payment</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Enrollment System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a0dad 0%, #000000 100%);
+            color: #e0e0e0;
+            /* softer white for readability */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* vertical center */
+            align-items: center;
+            /* horizontal center */
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #d9b3ff;
+            /* light lavender accent */
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #cfcfcf;
+        }
+
+        .role-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        a.student {
+            background-color: #8e2de2;
+            /* rich purple */
+            color: #fff;
+        }
+
+        a.student:hover {
+            background-color: #6a0dad;
+            /* darker purple */
+        }
+
+        a.teacher {
+            background-color: #4a148c;
+            /* deep violet */
+            color: #fff;
+        }
+
+        a.teacher:hover {
+            background-color: #2e0854;
+            /* almost black-purple */
+        }
+
+        footer {
+            position: absolute;
+            bottom: 15px;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9em;
+            opacity: 0.7;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Welcome to the Enrollment System</h2>
+    <p>Please choose your role:</p>
+    <div class="role-buttons">
+        <a href="{% url 'login_user' %}?role=student" class="student">Login as Student</a>
+        <a href="{% url 'login_user' %}?role=teacher" class="teacher">Login as Teacher</a>
+    </div>
+    <footer>
+        &copy; {{ year|default:"2025" }} Online Enrollment System
+    </footer>
+</body>
+
+</html>

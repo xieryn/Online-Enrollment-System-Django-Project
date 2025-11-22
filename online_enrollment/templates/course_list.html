@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+    /* Form styling */
+    .courses-form {
+        margin-bottom: 30px;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .courses-form .form-group {
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .courses-form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: 600;
+        color: #f0d6ff;
+    }
+
+    .courses-form input,
+    .courses-form textarea,
+    .courses-form select {
+        width: 100%;
+        padding: 12px 15px;
+        border-radius: 10px;
+        border: 1px solid #6a0dad;
+        background: #2e0854;
+        color: #fff;
+        font-size: 1em;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .courses-form input:focus,
+    .courses-form textarea:focus,
+    .courses-form select:focus {
+        outline: none;
+        border-color: #8e2de2;
+        box-shadow: 0 0 8px rgba(142, 45, 226, 0.8);
+    }
+
+    .courses-form .help-text {
+        font-size: 0.85em;
+        color: #cfcfcf;
+        margin-top: 3px;
+    }
+
+    .courses-form .error {
+        font-size: 0.85em;
+        color: #ff6b6b;
+        margin-top: 3px;
+    }
+
+    .courses-form button {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        background-color: #8e2de2;
+        color: #fff;
+        font-weight: 600;
+        font-size: 1em;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .courses-form button:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        color: #fff;
+        transition: all 0.3s ease;
+        border: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #8e2de2;
+    }
+
+    .btn-primary:hover {
+        background-color: #6a0dad;
+    }
+
+    .btn-warning {
+        background-color: #ff9f1a;
+        color: #fff;
+    }
+
+    .btn-warning:hover {
+        background-color: #e07b00;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 0.95em;
+    }
+
+    /* Table styling */
+    table {
+        width: 90%;
+        margin: 0 auto 50px;
+        border-collapse: collapse;
+        background-color: #2e0854;
+        color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    table thead {
+        background-color: #6a0dad;
+    }
+
+    table th,
+    table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #4a148c;
+    }
+
+    table tr:hover {
+        background-color: #8e2de2;
+    }
+</style>
+
+<h2 style="text-align: center; color: #d9b3ff; margin-bottom: 20px;">Courses</h2>
+
+
+<a href="{% url 'course_add' %}" class="btn btn-primary" style="margin-bottom: 20px;">Add Course</a>
+
+<hr>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Credits</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for course in courses %}
+        <tr>
+            <td>{{ course.course_id }}</td>
+            <td>{{ course.course_name }}</td>
+            <td>{{ course.course_description }}</td>
+            <td>{{ course.credits }}</td>
+            <td>
+                <a href="{% url 'course_edit' course.pk %}" class="btn btn-warning btn-sm">Edit</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No courses yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
